@@ -6,6 +6,10 @@ const schema = new mongoose.Schema(
       type: String,
       required: [true, "QrCode is required"],
     },
+    status:{
+      type: Boolean,
+      default: false,
+    }
     
   },
 
