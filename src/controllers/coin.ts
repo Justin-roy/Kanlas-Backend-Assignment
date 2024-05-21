@@ -64,14 +64,15 @@ export const checkQrCode = TryCatch(async (req, res, next) => {
   if (!user) {
     return next(new ErrorHandler("User id is not valid!", 404));
   }
+  
+  if (code.status === true) {
+    return next(new ErrorHandler("QR-CODE Already Scanned!", 200));
+  }
 
   // updating user coin and qr code status
   user.coin += 100;
   code.status = true;
 
-  if (code.status === true) {
-    return next(new ErrorHandler("QR-CODE Already Scanned!", 200));
-  }
 
   await Promise.all([user.save(), code.save()]);
 
