@@ -28,8 +28,8 @@ export const addQrCode = TryCatch(async (req, res, next) => {
   const { qrCode } = req.query;
   if (!qrCode) return next(new ErrorHandler("QRCode is required", 400));
 
-  let existCode = await QrCode.findOne({code: qrCode});
-  if(existCode){
+  let existCode = await QrCode.findOne({ code: qrCode });
+  if (existCode) {
     return next(new ErrorHandler("QrCode Already Exists", 200));
   }
 
@@ -50,13 +50,12 @@ export const addQrCode = TryCatch(async (req, res, next) => {
   });
 });
 
-
 export const checkQrCode = TryCatch(async (req, res, next) => {
   const { qrCode } = req.query;
   if (!qrCode) return next(new ErrorHandler("QRCode is required", 400));
 
-  let code = await QrCode.findOne({code: qrCode});
-  if(!code){
+  let code = await QrCode.findOne({ code: qrCode });
+  if (!code) {
     return next(new ErrorHandler("QrCode Not Found!", 200));
   }
 
@@ -65,6 +64,10 @@ export const checkQrCode = TryCatch(async (req, res, next) => {
   if (!user) {
     return next(new ErrorHandler("User id is not valid!", 404));
   }
+
+  // updating user coin 
+  user.coin += 100;
+  await user.save();
 
   return res.status(200).json({
     success: true,
