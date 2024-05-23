@@ -29,7 +29,7 @@ app.route("/:id").get(getUser).put(updateUser).delete(deleteUser);
 app.post("/admin",adminLogin);
 
 // Route - api/user/create-coin/id -> logged in user id
-app.put("/create-coin/:id",createCoin);
+app.patch("/create-coin/:id",createCoin);
 
 // Route - api/user/qr-code/id -> logged in user id
 app.post("/qr-code/:id",addQrCode);

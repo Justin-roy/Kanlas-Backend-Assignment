@@ -26,7 +26,7 @@ app.use(morgan("dev"));
 app.use(
   cors({
     origin: true,
-    methods: ["POST", "GET", "PUT", "DELETE"],
+    methods: ["POST", "GET", "PUT", "DELETE", "PATCH"],
     credentials: true,
     optionsSuccessStatus: 200,
   })
